@@ -1,6 +1,10 @@
 <?php
 
-Route::group(['prefix' => 'install', 'as' => 'LaravelInstaller::', 'namespace' => 'RachidLaasri\LaravelInstaller\Controllers', 'middleware' => ['web', 'install']], function () {
+Route::group(['prefix' => 'install',
+  'as' => 'LaravelInstaller::',
+  'namespace' => 'RachidLaasri\LaravelInstaller\Controllers',
+  'middleware' => ['web', 'install']],
+  function () {
     Route::get('/', [
         'as' => 'welcome',
         'uses' => 'WelcomeController@welcome',
@@ -42,8 +46,23 @@ Route::group(['prefix' => 'install', 'as' => 'LaravelInstaller::', 'namespace' =
     ]);
 
     Route::get('database', [
-        'as' => 'database',
-        'uses' => 'DatabaseController@database',
+      'as' => 'database',
+      'uses' => 'DatabaseController@index',
+    ]);
+
+    Route::post('databaseMigrate', [
+        'as' => 'databaseMigrate',
+        'uses' => 'DatabaseController@migrate',
+    ]);
+
+    Route::get('admin', [
+      'as' => 'admin',
+      'uses' => 'AdminController@index',
+    ]);
+
+    Route::post('adminCreate', [
+      'as' => 'adminCreate',
+      'uses' => 'AdminController@index',
     ]);
 
     Route::get('final', [

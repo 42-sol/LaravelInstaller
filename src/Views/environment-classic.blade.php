@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-    <i class="fa fa-code fa-fw" aria-hidden="true"></i> {{ trans('installer_messages.environment.classic.title') }}
+    <i class="fa fa-code fa-fw" aria-hidden="true"></i> {{ trans('installer_messages.environment.title') }}
 @endsection
 
 @section('container')
@@ -21,17 +21,21 @@
         </div>
     </form>
 
-    @if( ! isset($environment['errors']))
+    @if( !isset($environment['errors']))
         <div class="buttons-container">
-            <a class="button float-left" href="{{ route('LaravelInstaller::environmentWizard') }}">
+            <p>
+              <a class="button" href="{{ route('LaravelInstaller::environmentWizard') }}">
                 <i class="fa fa-sliders fa-fw" aria-hidden="true"></i>
                 {!! trans('installer_messages.environment.classic.back') !!}
-            </a>
-            <a class="button float-right" href="{{ route('LaravelInstaller::database') }}">
+              </a>
+            </p>
+            <p>
+              <a class="button" href="{{ route('LaravelInstaller::database') }}">
                 <i class="fa fa-check fa-fw" aria-hidden="true"></i>
                 {!! trans('installer_messages.environment.classic.install') !!}
                 <i class="fa fa-angle-double-right fa-fw" aria-hidden="true"></i>
-            </a>
+              </a>
+            </p>
         </div>
     @endif
 

@@ -1,15 +1,11 @@
 {
-    "name": "rachidlaasri/laravel-installer",
-    "description": "Laravel web installer",
+    "name": "42-sol/laravel-installer",
+    "description": "Laravel projects installer",
     "license": "MIT",
     "authors": [
         {
-            "name": "Rachid Laasri",
-            "email": "rashidlaasri@gmail.com"
-        },
-        {
-            "name": "Jeremy Kenedy",
-            "email": "jeremykenedy@gmail.com"
+            "name": "ValerianMemsk",
+            "email": "goncharenkova@42sol.ru"
         }
     ],
     "require": {
@@ -33,5 +29,5 @@
     "config": {
         "sort-packages": true
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "dev"
 }

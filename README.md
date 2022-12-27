@@ -16,17 +16,17 @@
 
 ## About
 
-Do you want your clients to be able to install a Laravel project just like they do with WordPress or any other CMS?
-This Laravel package allows users who don't use Composer, SSH etc to install your application just by following the setup wizard.
-The current features are :
+Форк от библиотеки [LaravelInstaller](https://github.com/rashidlaasri/LaravelInstaller). Штука вроде красивая и удобная, но уже пару лет дохлая.
+Решил взять и допилить под наши нужды, т.к это был наиболее богатый на изначальные опции вариант
 
-- Check For Server Requirements.
-- Check For Folders Permissions.
-- Ability to set database information.
-	- .env text editor
-	- .env form wizard
-- Migrate The Database.
-- Seed The Tables.
+Фичи:
+- Ппроверить соответсвие требованиям сервера.
+- Проверить разрешения на папках.
+- Возможность настроить .env.
+	- руками через редактор
+	- через мастер форм 
+- Провести миграции.
+- Засидить таблицы.
 
 ## Requirements
 
@@ -37,7 +37,7 @@ The current features are :
 1. From your projects root folder in terminal run:
 
 ```bash
-    composer require rachidlaasri/laravel-installer
+    composer require 42-sol/laravel-installer
 ```
 
 2. Register the package

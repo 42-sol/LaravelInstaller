@@ -5,8 +5,7 @@ namespace RachidLaasri\LaravelInstaller\Controllers;
 use Illuminate\Routing\Controller;
 use RachidLaasri\LaravelInstaller\Helpers\PermissionsChecker;
 
-class PermissionsController extends Controller
-{
+class PermissionsController extends Controller {
     /**
      * @var PermissionsChecker
      */
@@ -15,8 +14,7 @@ class PermissionsController extends Controller
     /**
      * @param PermissionsChecker $checker
      */
-    public function __construct(PermissionsChecker $checker)
-    {
+    public function __construct(PermissionsChecker $checker) {
         $this->permissions = $checker;
     }
 
@@ -25,8 +23,7 @@ class PermissionsController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function permissions()
-    {
+    public function permissions() {
         $permissions = $this->permissions->check(
             config('installer.permissions')
         );

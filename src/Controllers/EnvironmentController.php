@@ -6,23 +6,22 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use RachidLaasri\LaravelInstaller\Events\EnvironmentSaved;
 use RachidLaasri\LaravelInstaller\Helpers\EnvironmentManager;
 use Validator;
 
-class EnvironmentController extends Controller
-{
+class EnvironmentController extends Controller {
     /**
      * @var EnvironmentManager
      */
-    protected $EnvironmentManager;
+    protected EnvironmentManager $EnvironmentManager;
 
     /**
      * @param EnvironmentManager $environmentManager
      */
-    public function __construct(EnvironmentManager $environmentManager)
-    {
+    public function __construct(EnvironmentManager $environmentManager) {
         $this->EnvironmentManager = $environmentManager;
     }
 
@@ -31,8 +30,7 @@ class EnvironmentController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function environmentMenu()
-    {
+    public function environmentMenu() {
         return view('vendor.installer.environment');
     }
 
@@ -41,8 +39,7 @@ class EnvironmentController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function environmentWizard()
-    {
+    public function environmentWizard() {
         $envConfig = $this->EnvironmentManager->getEnvContent();
 
         return view('vendor.installer.environment-wizard', compact('envConfig'));
@@ -53,8 +50,7 @@ class EnvironmentController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function environmentClassic()
-    {
+    public function environmentClassic() {
         $envConfig = $this->EnvironmentManager->getEnvContent();
 
         return view('vendor.installer.environment-classic', compact('envConfig'));
@@ -67,8 +63,7 @@ class EnvironmentController extends Controller
      * @param Redirector $redirect
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function saveClassic(Request $input, Redirector $redirect)
-    {
+    public function saveClassic(Request $input, Redirector $redirect) {
         $message = $this->EnvironmentManager->saveFileClassic($input);
 
         event(new EnvironmentSaved($input));
@@ -84,8 +79,7 @@ class EnvironmentController extends Controller
      * @param Redirector $redirect
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function saveWizard(Request $request, Redirector $redirect)
-    {
+    public function saveWizard(Request $request, Redirector $redirect) {
         $rules = config('installer.environment.form.rules');
         $messages = [
             'environment_custom.required_if' => trans('installer_messages.environment.wizard.form.name_required'),
@@ -103,9 +97,13 @@ class EnvironmentController extends Controller
             ]);
         }
 
-        $results = $this->EnvironmentManager->saveFileWizard($request);
+        $results = trans('installer_messages.environment.success');//$this->EnvironmentManager->saveFileWizard($request);
 
         event(new EnvironmentSaved($request));
+
+        if (config('installer.final.key')) {
+          Artisan::call('key:generate', ['--force'=> true]);
+        }
 
         return $redirect->route('LaravelInstaller::database')
                         ->with(['results' => $results]);
@@ -118,8 +116,7 @@ class EnvironmentController extends Controller
      * @param Request $request
      * @return bool
      */
-    private function checkDatabaseConnection(Request $request)
-    {
+    private function checkDatabaseConnection(Request $request) {
         $connection = $request->input('database_connection');
 
         $settings = config("database.connections.$connection");
@@ -141,6 +138,7 @@ class EnvironmentController extends Controller
         ]);
 
         DB::purge();
+
 
         try {
             DB::connection()->getPdo();

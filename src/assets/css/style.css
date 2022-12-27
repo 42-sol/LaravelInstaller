@@ -3122,6 +3122,9 @@ input[type=text] {
   .step__icon.update:before {
     content: '\f2bf';
     font-family: Ionicons; }
+  .step__icon.admin:before {
+    content: '\f2bf';
+    font-family: Ionicons; }
 
 .main {
   margin-top: -20px;

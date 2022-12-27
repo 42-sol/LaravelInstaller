@@ -11,13 +11,12 @@
 
 @section('container')
 
-	@if(session('message')['dbOutputLog'])
-		<p><strong><small>{{ trans('installer_messages.final.migration') }}</small></strong></p>
+  <p><strong>{{ trans('installer_messages.final.finished') }}</strong></p>
+
+	@if(isset(session('message')['dbOutputLog']))
+		<p><strong>{{ trans('installer_messages.final.migration') }}</strong></p>
 		<pre><code>{{ session('message')['dbOutputLog'] }}</code></pre>
 	@endif
-
-	<p><strong><small>{{ trans('installer_messages.final.console') }}</small></strong></p>
-	<pre><code>{{ $finalMessages }}</code></pre>
 
 	<p><strong><small>{{ trans('installer_messages.final.log') }}</small></strong></p>
 	<pre><code>{{ $finalStatusMessage }}</code></pre>
@@ -26,7 +25,7 @@
 	<pre><code>{{ $finalEnvFile }}</code></pre>
 
     <div class="buttons">
-        <a href="{{ url('/') }}" class="button">{{ trans('installer_messages.final.exit') }}</a>
+        <a href="{{ url('/admin') }}" class="button">{{ trans('installer_messages.final.exit') }}</a>
     </div>
 
 @endsection

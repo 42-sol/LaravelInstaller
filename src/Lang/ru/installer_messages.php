@@ -7,7 +7,7 @@ return [
      * Shared translations.
      *
      */
-    'title'        => 'Установка Laravel',
+    'title'        => 'Установка FamilyOffice',
     'next'         => 'Следующий шаг',
 
     /*
@@ -16,9 +16,9 @@ return [
      *
      */
     'welcome'      => [
-        'title'   => 'Установка Laravel',
-        'message' => 'Добро пожаловать в первоначальную настройку фреймворка Laravel.',
-        'next'    => 'Следующий шаг',
+      'title'   => 'Установка FamilyOffice',
+      'message' => 'Добро пожаловать в первоначальную настройку проекта',
+      'next' => 'Проверить наличие требуемых модулей'
     ],
 
     /*
@@ -27,8 +27,8 @@ return [
      *
      */
     'requirements' => [
-        'title' => 'Необходимые модули',
-        'next'  => 'Следующий шаг',
+      'title' => 'Необходимые модули',
+      'next' => 'Проверить разрешения для папок'
     ],
 
     /*
@@ -37,9 +37,38 @@ return [
      *
      */
     'permissions'  => [
-        'title' => 'Проверка прав на папках',
-        'next'  => 'Следующий шаг',
+      'title' => 'Проверка разрешений на папках',
+      'next' => 'Настроить окружение'
     ],
+
+  /*
+   * database page transltions
+   */
+  'database' => [
+    'templateTitle' => 'Шаг 4 | База данных',
+    'title' => 'Выполнение миграций и заполнение тестовыми данными',
+    'label' => 'Использовать сидеры (заполнить базу данных тестовыми данными)',
+    'migrate' => 'Выполнить миграции',
+    'statusOK' => 'Операция выполнена успешно',
+    'statusError' => 'Во время операции произошла ошибка:',
+    'next' => 'Создать пользователя'
+  ],
+
+  /*
+   * admin account creation page translations
+   */
+  'admin' => [
+    'templateTitle' => 'Шаг 5| Учётная запись',
+    'title' => 'Создать учётную запись администратора',
+    'name' => 'Имя',
+    'login' => 'Логин',
+    'email' => 'Email',
+    'password' => 'Пароль',
+    'create' => 'Создать',
+    'statusOK' => 'Учётная зпись успешно создана',
+    'statusError' => 'Ошибка при создании учётной записи:',
+    'next' => 'Завершение'
+  ],
 
     /*
      *
@@ -56,7 +85,6 @@ return [
         ],
         'wizard' => [
             'templateTitle' => 'Шаг 3 | Настройки среды | Управляемый мастер',
-            'title' => 'Управляемый <code> .env </code> Мастер',
             'tabs' => [
                 'environment' => 'Окружение',
                 'database' => 'База данных',
@@ -73,7 +101,7 @@ return [
                 'app_environment_label_production' => 'Продакшн',
                 'app_environment_label_other' => 'Другое',
                 'app_environment_placeholder_other' => 'Введите свое окружение ...',
-                'app_debug_label' => 'Дебаг приложения',
+                'app_debug_label' => 'Разрешить отладку приложения',
                 'app_debug_label_true' => 'Да',
                 'app_debug_label_false' => 'Нет',
                 'app_log_level_label' => 'Уровень журнала логирования',
@@ -105,7 +133,7 @@ return [
 
                 'app_tabs' => [
                     'more_info' => 'Больше информации',
-                    'broadcasting_title' => 'Broadcasting, Caching, Session, &amp; Queue',
+                    'broadcasting_title' => 'Broadcasting, Caching, Session, Queue',
                     'broadcasting_label' => 'Broadcast Driver',
                     'broadcasting_placeholder' => 'Broadcast Driver',
                     'cache_label' => 'Cache Driver',
@@ -147,13 +175,13 @@ return [
                     'install' => 'Установить',
                 ],
             ],
+          'next' => 'Выполнить миграции'
         ],
         'classic' => [
             'templateTitle' => 'Шаг 3 | Настройки среды | Классический редактор',
-            'title' => 'Классический редактор среды',
             'save' => 'Сохранить .env',
             'back' => 'Использовать мастер форм',
-            'install' => 'Сохранить и установить',
+            'install' => 'Сохранить и продолжить',
         ],
         'title'   => 'Настройки окружения',
         'save'    => 'Сохранить .env',
@@ -168,7 +196,8 @@ return [
      */
     'final'        => [
         'title'    => 'Готово',
-        'finished' => 'Приложение успешно настроено.',
-        'exit'     => 'Нажмите для выхода',
+        'finished' => 'Приложение успешно настроено, но некоторые параметры, такие как настройка почты, расписания
+          выполнения заданий или интеграций производится из панели администратора.',
+        'exit'     => 'Открыть панель администратора',
     ],
 ];
