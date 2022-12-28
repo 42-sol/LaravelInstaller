@@ -22,8 +22,8 @@ return [
      */
     'welcome' => [
         'templateTitle' => 'Welcome',
-        'title'   => 'Laravel Installer',
-        'message' => 'Easy Installation and Setup Wizard.',
+        'title'   => 'Family Office Installer',
+        'message' => 'Easy Installation and Setup for Family Office app',
         'next'    => 'Check Requirements',
     ],
 
@@ -156,17 +156,47 @@ return [
                     'install' => 'Install',
                 ],
             ],
+          'next' => 'Run migrations'
         ],
         'classic' => [
             'templateTitle' => 'Step 3 | Environment Settings | Classic Editor',
             'title' => 'Classic Environment Editor',
             'save' => 'Save .env',
             'back' => 'Use Form Wizard',
-            'install' => 'Save and Install',
+            'install' => 'Save and continue',
         ],
         'success' => 'Your .env file settings have been saved.',
         'errors' => 'Unable to save the .env file, Please create it manually.',
     ],
+
+  /*
+   * database page transltions
+  */
+  'database' => [
+    'templateTitle' => 'Step 4 | Database',
+    'title' => 'Run migrations and seeders',
+    'label' => 'Use seeders (fill database with test data)',
+    'migrate' => 'Run migrations',
+    'statusOK' => 'Success',
+    'statusError' => 'Error occurred during migration:',
+    'next' => 'Create user'
+  ],
+
+  /*
+   * admin account creation page translations
+   */
+  'admin' => [
+    'templateTitle' => 'Step 5| Account',
+    'title' => 'Create an admin account',
+    'name' => 'Name',
+    'login' => 'Login',
+    'email' => 'Email',
+    'password' => 'Password',
+    'create' => 'Create',
+    'statusOK' => 'Account created',
+    'statusError' => 'Error occurred during creation process:',
+    'next' => 'Finish'
+  ],
 
     'install' => 'Install',
 
@@ -185,14 +215,16 @@ return [
      *
      */
     'final' => [
+        'finished' => 'Application has been successfully installed, but some parameters like messaging, schedule
+          and backups are configured from admin panel. Proceed there.',
+        'exit' => 'Open admin panel',
         'title' => 'Installation Finished',
         'templateTitle' => 'Installation Finished',
-        'finished' => 'Application has been successfully installed.',
-        'migration' => 'Migration &amp; Seed Console Output:',
+        'migration' => 'Migration and Seed Console Output:',
         'console' => 'Application Console Output:',
         'log' => 'Installation Log Entry:',
         'env' => 'Final .env File:',
-        'exit' => 'Click here to exit',
+
     ],
 
     /*
@@ -236,8 +268,9 @@ return [
          */
         'final' => [
             'title' => 'Finished',
-            'finished' => 'Application\'s database has been successfully updated.',
-            'exit' => 'Click here to exit',
+            'finished' => 'Application has been successfully installed, but some parameters like messaging, schedule
+              and backups are configured from admin panel. Proceed there.',
+            'exit' => 'Open admin panel',
         ],
 
         'log' => [
