@@ -32,7 +32,7 @@
                   <li class="step__divider"></li>
 
                   <li class="step__item {{ isActive('LaravelInstaller::admin') }}">
-                    @if(Request::is('install/admin'))
+                    @if(Request::is('install/admin') || Request::is('install/adminCreate'))
                       <a href="{{ route('LaravelInstaller::admin') }}">
                         <i class="step__icon fa fa-list" aria-hidden="true"></i>
                       </a>
@@ -45,7 +45,9 @@
 
                   <li class="step__item {{ isActive('LaravelInstaller::database') }}">
                     @if(Request::is('install/admin') ||
-                        Request::is('install/database'))
+                        Request::is('install/adminCreate') ||
+                        Request::is('install/database' ||
+                        Request::is('install/databaseMigrate')))
                       <a href="{{ route('LaravelInstaller::database') }}">
                         <i class="step__icon fa fa-list" aria-hidden="true"></i>
                       </a>
@@ -61,7 +63,9 @@
                             Request::is('install/environment/wizard') ||
                             Request::is('install/environment/classic') ||
                             Request::is('install/admin') ||
-                            Request::is('install/database') )
+                            Request::is('install/adminCreate') ||
+                            Request::is('install/database' ||
+                            Request::is('install/databaseMigrate')))
                             <a href="{{ route('LaravelInstaller::environment') }}">
                                 <i class="step__icon fa fa-cog" aria-hidden="true"></i>
                             </a>
@@ -78,7 +82,9 @@
                             Request::is('install/environment/wizard') ||
                             Request::is('install/environment/classic') ||
                             Request::is('install/admin') ||
-                            Request::is('install/database'))
+                            Request::is('install/adminCreate') ||
+                            Request::is('install/database' ||
+                            Request::is('install/databaseMigrate')))
                             <a href="{{ route('LaravelInstaller::permissions') }}">
                                 <i class="step__icon fa fa-key" aria-hidden="true"></i>
                             </a>
@@ -95,7 +101,9 @@
                             Request::is('install/environment/wizard') ||
                             Request::is('install/environment/classic') ||
                             Request::is('install/admin') ||
-                            Request::is('install/database'))
+                            Request::is('install/adminCreate') ||
+                            Request::is('install/database' ||
+                            Request::is('install/databaseMigrate')))
                             <a href="{{ route('LaravelInstaller::requirements') }}">
                                 <i class="step__icon fa fa-list" aria-hidden="true"></i>
                             </a>
@@ -112,7 +120,9 @@
                             Request::is('install/environment/wizard') ||
                             Request::is('install/environment/classic') ||
                             Request::is('install/admin') ||
-                            Request::is('install/database'))
+                            Request::is('install/adminCreate') ||
+                            Request::is('install/database' ||
+                            Request::is('install/databaseMigrate')))
                             <a href="{{ route('LaravelInstaller::welcome') }}">
                                 <i class="step__icon fa fa-home" aria-hidden="true"></i>
                             </a>
