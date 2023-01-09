@@ -31,45 +31,8 @@ class EnvironmentController extends Controller {
      * @return \Illuminate\View\View
      */
     public function environmentMenu() {
-        return view('vendor.installer.environment');
-    }
-
-    /**
-     * Display the Environment page.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function environmentWizard() {
-        $envConfig = $this->EnvironmentManager->getEnvContent();
-
-        return view('vendor.installer.environment-wizard', compact('envConfig'));
-    }
-
-    /**
-     * Display the Environment page.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function environmentClassic() {
-        $envConfig = $this->EnvironmentManager->getEnvContent();
-
-        return view('vendor.installer.environment-classic', compact('envConfig'));
-    }
-
-    /**
-     * Processes the newly saved environment configuration (Classic).
-     *
-     * @param Request $input
-     * @param Redirector $redirect
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function saveClassic(Request $input, Redirector $redirect) {
-        $message = $this->EnvironmentManager->saveFileClassic($input);
-
-        event(new EnvironmentSaved($input));
-
-        return $redirect->route('LaravelInstaller::environmentClassic')
-                        ->with(['message' => $message]);
+      $envConfig = $this->EnvironmentManager->getEnvContent();
+      return view('vendor.installer.environment-wizard', compact('envConfig'));
     }
 
     /**
@@ -92,12 +55,13 @@ class EnvironmentController extends Controller {
         }
 
         if (! $this->checkDatabaseConnection($request)) {
-            return $redirect->route('LaravelInstaller::environmentWizard')->withInput()->withErrors([
+            return $redirect->route('LaravelInstaller::environmentWizard')->withInput($request->all())->withErrors([
                 'database_connection' => trans('installer_messages.environment.wizard.form.db_connection_failed'),
             ]);
         }
 
-        $results = trans('installer_messages.environment.success');//$this->EnvironmentManager->saveFileWizard($request);
+        $results = trans('installer_messages.environment.success');
+        $this->EnvironmentManager->saveFileWizard($request);
 
         event(new EnvironmentSaved($request));
 

@@ -66,25 +66,6 @@ class EnvironmentManager
     }
 
     /**
-     * Save the edited content to the .env file.
-     *
-     * @param Request $input
-     * @return string
-     */
-    public function saveFileClassic(Request $input)
-    {
-        $message = trans('installer_messages.environment.success');
-
-        try {
-            file_put_contents($this->envPath, $input->get('envConfig'));
-        } catch (Exception $e) {
-            $message = trans('installer_messages.environment.errors');
-        }
-
-        return $message;
-    }
-
-    /**
      * Save the form content to the .env file.
      *
      * @param Request $request
@@ -100,6 +81,7 @@ class EnvironmentManager
         'APP_KEY='."\n".
         'APP_DEBUG='.$request->app_debug."\n".
         'APP_URL='.$request->app_url."\n\n".
+        'USER_ID=1000'."\n\n".
         'LOG_CHANNEL=stack'.
         'APP_LOG_LEVEL='.$request->app_log_level."\n\n".
         'DB_CONNECTION='.'site'."\n".
@@ -111,11 +93,14 @@ class EnvironmentManager
         'BROADCAST_DRIVER='.$request->broadcast_driver."\n".
         'CACHE_DRIVER='.$request->cache_driver."\n".
         'SESSION_DRIVER='.$request->session_driver."\n".
+        'SESSION_LIFETIME=120'."\n".
         'QUEUE_DRIVER='.$request->queue_driver."\n\n".
         'REDIS_HOST='.$request->redis_hostname."\n".
         'REDIS_PASSWORD='.$request->redis_password."\n".
         'REDIS_PORT='.$request->redis_port."\n\n".
-        'COLLABORA_PORT=9980';
+        'COLLABORA_PORT=9980'."\n".
+        'USE_SSL=false'."\n".
+        'HTTP_PORT=8080';
 
         try {
             file_put_contents($this->envPath, $envFileData);
