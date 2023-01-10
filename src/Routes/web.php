@@ -15,24 +15,9 @@ Route::group(['prefix' => 'install',
         'uses' => 'EnvironmentController@environmentMenu',
     ]);
 
-    Route::get('environment/wizard', [
-        'as' => 'environmentWizard',
-        'uses' => 'EnvironmentController@environmentWizard',
-    ]);
-
     Route::post('environment/saveWizard', [
         'as' => 'environmentSaveWizard',
         'uses' => 'EnvironmentController@saveWizard',
-    ]);
-
-    Route::get('environment/classic', [
-        'as' => 'environmentClassic',
-        'uses' => 'EnvironmentController@environmentClassic',
-    ]);
-
-    Route::post('environment/saveClassic', [
-        'as' => 'environmentSaveClassic',
-        'uses' => 'EnvironmentController@saveClassic',
     ]);
 
     Route::get('requirements', [

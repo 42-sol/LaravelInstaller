@@ -51,11 +51,11 @@ class EnvironmentController extends Controller {
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if ($validator->fails()) {
-            return $redirect->route('LaravelInstaller::environmentWizard')->withInput()->withErrors($validator->errors());
+            return $redirect->route('LaravelInstaller::environment')->withInput()->withErrors($validator->errors());
         }
 
         if (! $this->checkDatabaseConnection($request)) {
-            return $redirect->route('LaravelInstaller::environmentWizard')->withInput($request->all())->withErrors([
+            return $redirect->route('LaravelInstaller::environment')->withInput($request->all())->withErrors([
                 'database_connection' => trans('installer_messages.environment.wizard.form.db_connection_failed'),
             ]);
         }
@@ -65,23 +65,18 @@ class EnvironmentController extends Controller {
 
         event(new EnvironmentSaved($request));
 
-        if (config('installer.final.key')) {
-          Artisan::call('key:generate', ['--force'=> true]);
-        }
-
         return $redirect->route('LaravelInstaller::database')
                         ->with(['results' => $results]);
     }
 
     /**
-     * TODO: We can remove this code if PR will be merged: https://github.com/RachidLaasri/LaravelInstaller/pull/162
-     * Validate database connection with user credentials (Form Wizard).
+     * Validate database connection with user credentials.
      *
      * @param Request $request
      * @return bool
      */
     private function checkDatabaseConnection(Request $request) {
-        $connection = $request->input('database_connection');
+        $connection = 'site';
 
         $settings = config("database.connections.$connection");
 
@@ -90,7 +85,6 @@ class EnvironmentController extends Controller {
                 'default' => $connection,
                 'connections' => [
                     $connection => array_merge($settings, [
-                        'driver' => $connection,
                         'host' => $request->input('database_hostname'),
                         'port' => $request->input('database_port'),
                         'database' => $request->input('database_name'),

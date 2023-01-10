@@ -9,6 +9,9 @@ return [
      */
     'title'        => 'Установка FamilyOffice',
     'next'         => 'Следующий шаг',
+    'forms' => [
+      'errorTitle' => 'В ходе выполнения произошли ошибки:',
+    ],
 
     /*
      *
@@ -118,10 +121,6 @@ return [
                 'app_url_label' => 'URL приложения',
                 'app_url_placeholder' => 'URL приложения',
                 'db_connection_label' => 'Подключение к базе данных',
-                'db_connection_label_mysql' => 'mysql',
-                'db_connection_label_sqlite' => 'sqlite',
-                'db_connection_label_pgsql' => 'pgsql',
-                'db_connection_label_sqlsrv' => 'sqlsrv',
                 'db_host_label' => 'Хост базы данных',
                 'db_host_placeholder' => 'Хост базы данных',
                 'db_port_label' => 'Порт базы данных',
@@ -132,6 +131,7 @@ return [
                 'db_username_placeholder' => 'Имя пользователя базы данных',
                 'db_password_label' => 'Пароль базы данных',
                 'db_password_placeholder' => 'Пароль базы данных',
+              'db_connection_failed' => 'Не удалось подключится к базе данных.',
 
                 'app_tabs' => [
                     'more_info' => 'Больше информации',
@@ -157,16 +157,10 @@ return [
             ],
           'next' => 'Выполнить миграции'
         ],
-        'classic' => [
-            'templateTitle' => 'Шаг 3 | Настройки среды | Классический редактор',
-            'save' => 'Сохранить .env',
-            'back' => 'Использовать мастер форм',
-            'install' => 'Сохранить и продолжить',
-        ],
         'title'   => 'Настройки окружения',
         'save'    => 'Сохранить .env',
         'success' => 'Настройки успешно сохранены в файле .env',
-        'errors'  => 'Произошла ошибка при сохранении файла .env, пожалуйста, сохраните его вручную',
+        'errors'  => 'Произошла ошибка при сохранении файла .env, пожалуйста, попробуйте ещё раз или сохраните его вручную',
     ],
 
     /*

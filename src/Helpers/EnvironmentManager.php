@@ -4,6 +4,7 @@ namespace RachidLaasri\LaravelInstaller\Helpers;
 
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 
 class EnvironmentManager
@@ -78,7 +79,7 @@ class EnvironmentManager
         $envFileData =
         'APP_NAME=\''.$request->app_name."'\n".
         'APP_ENV='.$request->environment."\n".
-        'APP_KEY='."\n".
+        'APP_KEY='.'base64:'.base64_encode(Str::random(32))."\n".
         'APP_DEBUG='.$request->app_debug."\n".
         'APP_URL='.$request->app_url."\n\n".
         'USER_ID=1000'."\n\n".
@@ -108,6 +109,7 @@ class EnvironmentManager
             $results = trans('installer_messages.environment.errors');
         }
 
+        Artisan::call('key:generate', ['--force'=> true]);
         return $results;
     }
 }
