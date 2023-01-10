@@ -52,7 +52,7 @@ class DatabaseManager {
         try {
           Artisan::call('migrate', ['--force'=> true], $outputLog);
         } catch (Exception $e) {
-          return ['ststus' => false, 'error' => $e->getMessage()];
+          return ['status' => false, 'error' => $e->getMessage()];
         }
 
         return ['status' => true];
