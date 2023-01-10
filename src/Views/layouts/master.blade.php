@@ -34,7 +34,7 @@
                   <li class="step__item {{ isActive('LaravelInstaller::admin') }}">
                     @if(Request::is('install/admin') || Request::is('install/adminCreate'))
                       <a href="{{ route('LaravelInstaller::admin') }}">
-                        <i class="step__icon fa fa-list" aria-hidden="true"></i>
+                        <i class="step__icon fa fa-user" aria-hidden="true"></i>
                       </a>
                     @else
                       <i class="step__icon fa fa-user" aria-hidden="true"></i>
@@ -49,7 +49,7 @@
                         Request::is('install/database' ||
                         Request::is('install/databaseMigrate')))
                       <a href="{{ route('LaravelInstaller::database') }}">
-                        <i class="step__icon fa fa-list" aria-hidden="true"></i>
+                        <i class="step__icon fa fa-database" aria-hidden="true"></i>
                       </a>
                     @else
                       <i class="step__icon fa fa-database" aria-hidden="true"></i>

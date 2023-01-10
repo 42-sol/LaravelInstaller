@@ -29,10 +29,13 @@ class DatabaseController extends Controller
    *
    * @param Request $request
    *
-   * @return \Illuminate\Http\Response
+   * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
    */
-    public function migrate(Request $request): \Illuminate\Http\Response {
+    public function migrate(Request $request): \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response {
       $response = $this->databaseManager->migrateAndSeed($request);
-      return response()->view('vendor.installer.database', $response);
+      if ($response['status'] == false) {
+        return response()->view('vendor.installer.database', $response);
+      }
+      return redirect()->route('LaravelInstaller::admin');
     }
 }

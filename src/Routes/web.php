@@ -47,7 +47,7 @@ Route::group(['prefix' => 'install',
 
     Route::post('adminCreate', [
       'as' => 'adminCreate',
-      'uses' => 'AdminController@index',
+      'uses' => 'AdminController@createAdminUser',
     ]);
 
     Route::get('final', [
