@@ -131,6 +131,6 @@ return [
     | Boolean value
     |
     */
-    'updaterEnabled' => '',
+    'updaterEnabled' => false,
 
 ];

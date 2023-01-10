@@ -9,8 +9,6 @@ return [
      */
     'title' => 'Laravel Installer',
     'next' => 'Next Step',
-    'back' => 'Previous',
-    'finish' => 'Install',
     'forms' => [
         'errorTitle' => 'The Following errors occurred:',
     ],
@@ -58,13 +56,9 @@ return [
         'menu' => [
             'templateTitle' => 'Step 3 | Environment Settings',
             'title' => 'Environment Settings',
-            'desc' => 'Please select how you want to configure the apps <code>.env</code> file.',
-            'wizard-button' => 'Form Wizard Setup',
-            'classic-button' => 'Classic Text Editor',
         ],
         'wizard' => [
             'templateTitle' => 'Step 3 | Environment Settings | Guided Wizard',
-            'title' => 'Guided <code>.env</code> Wizard',
             'tabs' => [
                 'environment' => 'Environment',
                 'database' => 'Database',
@@ -127,7 +121,6 @@ return [
                 'buttons' => [
                     'setup_database' => 'Setup Database',
                     'setup_application' => 'Setup Application',
-                    'install' => 'Install',
                 ],
             ],
           'next' => 'Run migrations'
@@ -192,56 +185,5 @@ return [
         'log' => 'Installation Log Entry:',
         'env' => 'Final .env File:',
 
-    ],
-
-    /*
-     *
-     * Update specific translations
-     *
-     */
-    'updater' => [
-        /*
-         *
-         * Shared translations.
-         *
-         */
-        'title' => 'Laravel Updater',
-
-        /*
-         *
-         * Welcome page translations for update feature.
-         *
-         */
-        'welcome' => [
-            'title'   => 'Welcome To The Updater',
-            'message' => 'Welcome to the update wizard.',
-        ],
-
-        /*
-         *
-         * Welcome page translations for update feature.
-         *
-         */
-        'overview' => [
-            'title'   => 'Overview',
-            'message' => 'There is 1 update.|There are :number updates.',
-            'install_updates' => 'Install Updates',
-        ],
-
-        /*
-         *
-         * Final page translations.
-         *
-         */
-        'final' => [
-            'title' => 'Finished',
-            'finished' => 'Application has been successfully installed, but some parameters like messaging, schedule
-              and backups are configured from admin panel. Proceed there.',
-            'exit' => 'Open admin panel',
-        ],
-
-        'log' => [
-            'success_message' => 'Laravel Installer successfully UPDATED on ',
-        ],
     ],
 ];

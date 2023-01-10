@@ -34,7 +34,9 @@
 
 ## Installation
 
-1. В коревой папке проекта в терминале выполнить команду:
+1. В коревой папке проекта в терминале выполнить команду: 
+ 
+ !!! на данный момент не актуально !!!
 
 ```bash
     composer require 42-sol/laravel-installer
@@ -59,18 +61,12 @@
 ## Routes
 
 * `/install`
-* `/update`
 
 ## Usage
 
 * **Для пути Install**
   * Чтобы начать установку, откройте путь `/install` и следуйте инструкциям.
   * После окончания установки пустой файл `installed` будет создан в `/storage`. Дальнейшие попытки открыть путь `/install` перенаправляются на `/dashboard`.
-
-* **Для пути Update** 
-  * Тут я ничего не трогал, т.к. функционал по-факту просто выполняет миграции, если есть новые. Довольно бестолковая надостройка, как по мне, возможно стоит убрать. По-дефолту отключен, меняется в конфиге. 
-  * Чтобы "обновить", откройте путь `/update` и следуйте интрукциям.
-  * Автоматически счиатет количесво миграций, если их НЕ стало больше - отваливается в 404. Но рераут можно поменять в конфигах
 
 * Поясненеия по файлам проекта:
 
@@ -96,11 +92,6 @@
 ![Laravel web installer | Step 4 Wizard 2](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-installer/install/4b-environment-wizard-2.jpg)
 ![Laravel web installer | Step 4 Wizard 3](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-installer/install/4b-environment-wizard-3.jpg)
 ![Laravel web installer | Step 5](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-installer/install/5-final.jpg)
-
-###### Updater
-![Laravel web updater | Step 1](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-installer/update/1-welcome.jpg)
-![Laravel web updater | Step 2](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-installer/update/2-updates.jpg)
-![Laravel web updater | Step 3](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-installer/update/3-finished.jpg)
 
 ### Changelog
 
