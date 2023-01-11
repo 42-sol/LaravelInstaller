@@ -101,7 +101,9 @@ class EnvironmentManager
         'REDIS_PORT='.$request->redis_port."\n\n".
         'COLLABORA_PORT=9980'."\n".
         'USE_SSL=false'."\n".
-        'HTTP_PORT=8080';
+        'HTTP_PORT=8080'."\n\n".
+        'MARIADB_VERSION=10.3.16'."\n".
+        'DB_ROOT_PASSWORD'.Str::random(12);
 
         try {
             file_put_contents($this->envPath, $envFileData);
