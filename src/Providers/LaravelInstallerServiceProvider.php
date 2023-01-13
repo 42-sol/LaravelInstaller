@@ -4,8 +4,9 @@ namespace RachidLaasri\LaravelInstaller\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
-use RachidLaasri\LaravelInstaller\Middleware\canInstall;
-use RachidLaasri\LaravelInstaller\Middleware\canUpdate;
+use RachidLaasri\LaravelInstaller\Middleware\CanInstall;
+use RachidLaasri\LaravelInstaller\Middleware\CanUpdate;
+use RachidLaasri\LaravelInstaller\Middleware\Installed;
 
 class LaravelInstallerServiceProvider extends ServiceProvider
 {
@@ -36,6 +37,7 @@ class LaravelInstallerServiceProvider extends ServiceProvider
     {
         $router->middlewareGroup('install', [CanInstall::class]);
         $router->middlewareGroup('update', [CanUpdate::class]);
+        $router->middlewareGroup('installed', [Installed::class])
     }
 
     /**

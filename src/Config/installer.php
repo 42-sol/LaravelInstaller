@@ -89,16 +89,25 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Installation
+    |--------------------------------------------------------------------------
+    */
+    'install' => [
+        'route_path' => 'install'
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Installed Middleware Options
     |--------------------------------------------------------------------------
     | Different available status switch configuration for the
-    | canInstall middleware located in `canInstall.php`.
+    | CanInstall middleware located in `CanInstall.php`.
     |
     */
     'installed' => [
         'redirectOptions' => [
             'route' => [
-                'name' => 'dashboard',
+                'name' => 'welcome',
                 'data' => [],
             ],
             'abort' => [

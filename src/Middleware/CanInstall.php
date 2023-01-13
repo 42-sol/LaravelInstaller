@@ -5,7 +5,7 @@ namespace RachidLaasri\LaravelInstaller\Middleware;
 use Closure;
 use Redirect;
 
-class canInstall
+class CanInstall
 {
     /**
      * Handle an incoming request.
