@@ -37,7 +37,7 @@ class LaravelInstallerServiceProvider extends ServiceProvider
     {
         $router->middlewareGroup('install', [CanInstall::class]);
         $router->middlewareGroup('update', [CanUpdate::class]);
-        $router->middlewareGroup('installed', [Installed::class])
+        $router->middlewareGroup('installed', [Installed::class]);
     }
 
     /**
