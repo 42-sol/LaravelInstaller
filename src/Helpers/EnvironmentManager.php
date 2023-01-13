@@ -82,8 +82,7 @@ class EnvironmentManager
         'APP_KEY='.'base64:'.base64_encode(Str::random(32))."\n".
         'APP_DEBUG='.$request->app_debug."\n".
         'APP_URL='.$request->app_url."\n\n".
-        'USER_ID=1000'."\n\n".
-        'LOG_CHANNEL=stack'.
+        'LOG_CHANNEL=stack'."\n".
         'APP_LOG_LEVEL='.$request->app_log_level."\n\n".
         'DB_CONNECTION='.'site'."\n".
         'DB_HOST='.$request->database_hostname."\n".
@@ -98,12 +97,7 @@ class EnvironmentManager
         'QUEUE_DRIVER='.$request->queue_driver."\n\n".
         'REDIS_HOST='.$request->redis_hostname."\n".
         'REDIS_PASSWORD='.$request->redis_password."\n".
-        'REDIS_PORT='.$request->redis_port."\n\n".
-        'COLLABORA_PORT=9980'."\n".
-        'USE_SSL=false'."\n".
-        'HTTP_PORT=8080'."\n\n".
-        'MARIADB_VERSION=10.3.16'."\n".
-        'DB_ROOT_PASSWORD'.Str::random(12);
+        'REDIS_PORT='.$request->redis_port;
 
         try {
             file_put_contents($this->envPath, $envFileData);
