@@ -1,8 +1,4 @@
-# Laravel Web Installer | A Web Installer [Package](https://packagist.org/packages/rachidlaasri/laravel-installer)
-
-[![Total Downloads](https://poser.pugx.org/rachidlaasri/laravel-installer/d/total.svg)](https://packagist.org/packages/rachidlaasri/laravel-installer)
-[![Latest Stable Version](https://poser.pugx.org/rachidlaasri/laravel-installer/v/stable.svg)](https://packagist.org/packages/rachidlaasri/laravel-installer)
-[![License](https://poser.pugx.org/rachidlaasri/laravel-installer/license.svg)](https://packagist.org/packages/rachidlaasri/laravel-installer)
+# Laravel Web Installer | A Web Installer [Package](https://packagist.org/packages/42sol/laravel-installer)
 
 - [About](#about)
 - [Requirements](#requirements)
@@ -15,8 +11,7 @@
 
 ## About
 
-Форк от библиотеки [LaravelInstaller](https://github.com/rashidlaasri/LaravelInstaller). Штука вроде красивая и удобная, но уже пару лет дохлая.
-Решил взять и допилить под наши нужды, т.к это был наиболее богатый на изначальные опции вариант
+Форк от библиотеки [LaravelInstaller](https://github.com/rashidlaasri/LaravelInstaller).
 
 Фичи:
 - Ппроверить соответсвие требованиям сервера.
@@ -35,11 +30,9 @@
 ## Installation
 
 1. В коревой папке проекта в терминале выполнить команду: 
- 
- !!! на данный момент не актуально !!!
 
 ```bash
-    composer require 42-sol/laravel-installer
+    composer require 42sol/laravel-installer
 ```
 
 2. Зарегистрировать пакет
@@ -92,7 +85,3 @@
 ![Laravel web installer | Step 4 Wizard 2](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-installer/install/4b-environment-wizard-2.jpg)
 ![Laravel web installer | Step 4 Wizard 3](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-installer/install/4b-environment-wizard-3.jpg)
 ![Laravel web installer | Step 5](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-installer/install/5-final.jpg)
-
-### Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
