@@ -48,7 +48,7 @@
 3. Опубликовать ресурсы пакета в соответствующие папки проекта:
 
 ```bash
-    php artisan vendor:publish --tag=laravelinstaller
+    php artisan vendor:publish --tag=installer
 ```
 
 ## Routes
