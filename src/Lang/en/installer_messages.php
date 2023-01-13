@@ -7,7 +7,7 @@ return [
      * Shared translations.
      *
      */
-    'title' => 'Laravel Installer',
+    'title' => config('app.name') . ' Installer',
     'next' => 'Next Step',
     'forms' => [
         'errorTitle' => 'The Following errors occurred:',
@@ -20,8 +20,8 @@ return [
      */
     'welcome' => [
         'templateTitle' => 'Welcome',
-        'title'   => 'Family Office Installer',
-        'message' => 'Easy Installation and Setup for Family Office app',
+        'title'   => config('app.name') . 'Installer',
+        'message' => 'Easy Installation and Setup for the app',
         'next'    => 'Check Requirements',
     ],
 
