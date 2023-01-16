@@ -176,15 +176,12 @@ return [
      *
      */
     'final' => [
-        'finished' => 'Application has been successfully installed, but some parameters like messaging, schedule
-          and backups are configured from admin panel. Proceed there.',
-        'exit' => 'Open admin panel',
         'title' => 'Installation Finished',
         'templateTitle' => 'Installation Finished',
         'migration' => 'Migration and Seed Console Output:',
         'console' => 'Application Console Output:',
         'log' => 'Installation Log Entry:',
-        'env' => 'Final .env File:',
-
+        'finished' => 'Application has been successfully installed',
+        'exit' => 'Get started',
     ],
 ];
