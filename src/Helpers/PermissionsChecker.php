@@ -29,6 +29,9 @@ class PermissionsChecker
      */
     public function check(array $folders)
     {
+        $this->results['permissions'] = [];
+        $this->results['errors'] = null;
+
         foreach ($folders as $folder => $permission) {
             if (! ($this->getPermission($folder) >= $permission)) {
                 $this->addFileAndSetErrors($folder, $permission, false);
@@ -38,6 +41,22 @@ class PermissionsChecker
         }
 
         return $this->results;
+    }
+
+    public function tryFixErrors() {
+        foreach ($this->results['permissions'] as $folder) {
+            $isSet = $folder['isSet'];
+
+            if (!$isSet) {
+                $path = $folder['folder'];
+                $permission = $folder['permission'];
+
+                try {
+                    $mode = octdec($permission);
+                    $this->chmod_r(base_path($path), $mode);
+                } catch (\Exception) {}
+            }
+        }
     }
 
     /**
@@ -79,5 +98,39 @@ class PermissionsChecker
         $this->addFile($folder, $permission, $isSet);
 
         $this->results['errors'] = true;
+    }
+
+    /**
+     * Change permissions recursively
+     *
+     * @param $path
+     * @param $permission
+     *
+     * @return bool
+     */
+    private function chmod_r($path, $permission) {
+        if (!is_dir($path)) {
+            return chmod($path, $permission);
+        }
+        $dh = opendir($path);
+        while ($file = readdir($dh)) {
+            if ($file != '.' && $file != '..' ) {
+                $fullpath = $path.'/'.$file;
+
+                if(!is_dir($fullpath)) {
+                    if (!chmod($fullpath, $permission)){
+                        return false;
+                    }
+                } else {
+                    if (!$this->chmod_r($fullpath, $permission)) {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        closedir($dh);
+
+        return chmod($path, $permission);
     }
 }

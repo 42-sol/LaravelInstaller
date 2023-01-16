@@ -23,7 +23,14 @@
         @endforeach
     </ul>
 
-    @if ( ! isset($permissions['errors']))
+    @if (isset($permissions['errors']))
+        <form method="post" action="{{ route('LaravelInstaller::fixPermissions', [], false) }}">
+            @csrf
+            <div class="buttons">
+                <button type="submit" class="button">{{ trans('installer_messages.permissions.fix') }}</button>
+            </div>
+        </form>
+    @else
         <div class="buttons">
             <a href="{{ route('LaravelInstaller::environment') }}" class="button">
                 {{ trans('installer_messages.permissions.next') }}

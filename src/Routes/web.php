@@ -31,6 +31,11 @@ Route::group([
         'uses' => 'PermissionsController@permissions',
     ]);
 
+    Route::post('permissions', [
+        'as' => 'fixPermissions',
+        'uses' => 'PermissionsController@fixPermissions',
+    ]);
+
     Route::get('database', [
       'as' => 'database',
       'uses' => 'DatabaseController@index',

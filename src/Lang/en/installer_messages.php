@@ -44,6 +44,7 @@ return [
     'permissions' => [
         'templateTitle' => 'Step 2 | Permissions',
         'title' => 'Permissions',
+        'fix' => 'Fix permissions',
         'next' => 'Configure Environment',
     ],
 
