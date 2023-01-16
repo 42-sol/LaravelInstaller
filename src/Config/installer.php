@@ -76,13 +76,6 @@ return [
                 'database_name'         => 'required|string|max:50',
                 'database_username'     => 'required|string|max:50',
                 'database_password'     => 'nullable|string|max:50',
-                'broadcast_driver'      => 'required|string|max:50',
-                'cache_driver'          => 'required|string|max:50',
-                'session_driver'        => 'required|string|max:50',
-                'queue_driver'          => 'required|string|max:50',
-                'redis_hostname'        => 'string|max:50',
-                'redis_password'        => 'nullable|string|max:50',
-                'redis_port'            => 'numeric',
             ],
         ],
     ],
@@ -93,7 +86,8 @@ return [
     |--------------------------------------------------------------------------
     */
     'install' => [
-        'route_path' => 'install'
+        'route_path' => 'install',
+        'default_queue_driver' => 'database',
     ],
 
     /*

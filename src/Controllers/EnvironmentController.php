@@ -6,6 +6,8 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Routing\Redirector;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Env;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use RachidLaasri\LaravelInstaller\Events\EnvironmentSaved;
@@ -31,8 +33,9 @@ class EnvironmentController extends Controller {
      * @return \Illuminate\View\View
      */
     public function environmentMenu() {
-      $envConfig = $this->EnvironmentManager->getEnvContent();
-      return view('vendor.installer.environment-wizard', compact('envConfig'));
+      $appUrl = Arr::get($_SERVER, 'REQUEST_SCHEME', 'http') . '://' . Arr::get($_SERVER, 'HTTP_HOST', 'localhost');
+      $env = collect($this->EnvironmentManager->getEnvContent());
+      return view('vendor.installer.environment-wizard', ['envConfig' => $env, 'appUrl' => $appUrl]);
     }
 
     /**

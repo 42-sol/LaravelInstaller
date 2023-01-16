@@ -31,7 +31,7 @@ class EnvironmentManager
     /**
      * Get the content of the .env file.
      *
-     * @return string
+     * @return array
      */
     public function getEnvContent()
     {
@@ -43,7 +43,7 @@ class EnvironmentManager
             }
         }
 
-        return file_get_contents($this->envPath);
+        return $_ENV;
     }
 
     /**
@@ -90,14 +90,7 @@ class EnvironmentManager
         'DB_DATABASE='.$request->database_name."\n".
         'DB_USERNAME='.$request->database_username."\n".
         'DB_PASSWORD='.$request->database_password."\n\n".
-        'BROADCAST_DRIVER='.$request->broadcast_driver."\n".
-        'CACHE_DRIVER='.$request->cache_driver."\n".
-        'SESSION_DRIVER='.$request->session_driver."\n".
-        'SESSION_LIFETIME=120'."\n".
-        'QUEUE_DRIVER='.$request->queue_driver."\n\n".
-        'REDIS_HOST='.$request->redis_hostname."\n".
-        'REDIS_PASSWORD='.$request->redis_password."\n".
-        'REDIS_PORT='.$request->redis_port;
+        'QUEUE_DRIVER='.config('installer.install.default_queue_driver');
 
         try {
             file_put_contents($this->envPath, $envFileData);

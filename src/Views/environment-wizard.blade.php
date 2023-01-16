@@ -26,13 +26,6 @@
             {{ trans('installer_messages.environment.wizard.tabs.database') }}
         </label>
 
-        <input id="tab3" type="radio" name="tabs" class="tab-input" />
-        <label for="tab3" class="tab-label">
-            <i class="fa fa-cogs fa-2x fa-fw" aria-hidden="true"></i>
-            <br />
-            {{ trans('installer_messages.environment.wizard.tabs.application') }}
-        </label>
-
         <form method="post" action="{{ route('LaravelInstaller::environmentSaveWizard') }}" class="tabs-wrap">
             <div class="tab" id="tab1content">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -41,7 +34,10 @@
                     <label for="app_name">
                         {{ trans('installer_messages.environment.wizard.form.app_name_label') }}
                     </label>
-                    <input type="text" name="app_name" id="app_name" value="{{ old('app_name') }}" placeholder="{{ trans('installer_messages.environment.wizard.form.app_name_placeholder') }}" />
+                    <input type="text" name="app_name" id="app_name"
+                           value="{{ old('app_name') ?? $envConfig->get('APP_NAME') }}"
+                           placeholder="{{ trans('installer_messages.environment.wizard.form.app_name_placeholder') }}"
+                    />
                     @if ($errors->has('app_name'))
                         <span class="error-block">
                             <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -55,14 +51,22 @@
                         {{ trans('installer_messages.environment.wizard.form.app_environment_label') }}
                     </label>
                     <select name="environment" id="environment" onchange='checkEnvironment(this.value);'>
-                        <option value="local" @if(old('environment') == 'local') selected @endif>{{ trans('installer_messages.environment.wizard.form.app_environment_label_local') }}</option>
-                        <option value="development" @if(old('environment') == 'development') selected @endif>{{ trans('installer_messages.environment.wizard.form.app_environment_label_developement') }}</option>
-                        <option value="production" @if(old('environment') == 'production') selected @endif>{{ trans('installer_messages.environment.wizard.form.app_environment_label_production') }}</option>
-                        <option value="other" @if(old('environment') == 'other') selected @endif>{{ trans('installer_messages.environment.wizard.form.app_environment_label_other') }}</option>
+                        <option value="local"
+                                @if(old('environment') == 'local' || $envConfig->get('APP_ENV') == 'local') selected @endif>
+                          {{ trans('installer_messages.environment.wizard.form.app_environment_label_local') }}
+                        </option>
+
+                        <option value="development"
+                                @if(old('environment') == 'development' || $envConfig->get('APP_ENV') == 'development') selected @endif>
+                          {{ trans('installer_messages.environment.wizard.form.app_environment_label_developement') }}
+                        </option>
+
+                        <option value="production"
+                                @if(old('environment') == 'production' || $envConfig->get('APP_ENV') == 'production') selected @endif>
+                          {{ trans('installer_messages.environment.wizard.form.app_environment_label_production') }}
+                        </option>
                     </select>
-                    <div id="environment_text_input" style="display: none;">
-                        <input type="text" name="environment_custom" id="environment_custom" placeholder="{{ trans('installer_messages.environment.wizard.form.app_environment_placeholder_other') }}"/>
-                    </div>
+
                     @if ($errors->has('app_name'))
                         <span class="error-block">
                             <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -96,14 +100,45 @@
                         {{ trans('installer_messages.environment.wizard.form.app_log_level_label') }}
                     </label>
                     <select name="app_log_level" id="app_log_level">
-                        <option value="debug" @if(old('app_log_level') == 'debug') selected @endif>{{ trans('installer_messages.environment.wizard.form.app_log_level_label_debug') }}</option>
-                        <option value="info" @if(old('app_log_level') == 'info') selected @endif>{{ trans('installer_messages.environment.wizard.form.app_log_level_label_info') }}</option>
-                        <option value="notice" @if(old('app_log_level') == 'notice') selected @endif>{{ trans('installer_messages.environment.wizard.form.app_log_level_label_notice') }}</option>
-                        <option value="warning" @if(old('app_log_level') == 'warning') selected @endif>{{ trans('installer_messages.environment.wizard.form.app_log_level_label_warning') }}</option>
-                        <option value="error" @if(old('app_log_level') == 'error') selected @endif>{{ trans('installer_messages.environment.wizard.form.app_log_level_label_error') }}</option>
-                        <option value="critical" @if(old('app_log_level') == 'critical') selected @endif>{{ trans('installer_messages.environment.wizard.form.app_log_level_label_critical') }}</option>
-                        <option value="alert" @if(old('app_log_level') == 'alert') selected @endif>{{ trans('installer_messages.environment.wizard.form.app_log_level_label_alert') }}</option>
-                        <option value="emergency" @if(old('app_log_level') == 'emergency') selected @endif>{{ trans('installer_messages.environment.wizard.form.app_log_level_label_emergency') }}</option>
+                        <option value="debug"
+                                @if(old('app_log_level') == 'debug' || $envConfig->get('LOG_LEVEL') == 'debug') selected @endif>
+                          {{ trans('installer_messages.environment.wizard.form.app_log_level_label_debug') }}
+                        </option>
+
+                        <option value="info"
+                                @if(old('app_log_level') == 'info' || $envConfig->get('LOG_LEVEL') == 'info') selected @endif>
+                          {{ trans('installer_messages.environment.wizard.form.app_log_level_label_info') }}
+                        </option>
+
+                        <option value="notice"
+                                @if(old('app_log_level') == 'notice' || $envConfig->get('LOG_LEVEL') == 'notice') selected @endif>
+                          {{ trans('installer_messages.environment.wizard.form.app_log_level_label_notice') }}
+                        </option>
+
+                        <option value="warning"
+                                @if(old('app_log_level') == 'warning' || $envConfig->get('LOG_LEVEL') == 'warning') selected @endif>
+                          {{ trans('installer_messages.environment.wizard.form.app_log_level_label_warning') }}
+                        </option>
+
+                        <option value="error"
+                                @if(old('app_log_level') == 'error' || $envConfig->get('LOG_LEVEL') == 'error') selected @endif>
+                          {{ trans('installer_messages.environment.wizard.form.app_log_level_label_error') }}
+                        </option>
+
+                        <option value="critical"
+                                @if(old('app_log_level') == 'critical' || $envConfig->get('LOG_LEVEL') == 'critical') selected @endif>
+                          {{ trans('installer_messages.environment.wizard.form.app_log_level_label_critical') }}
+                        </option>
+
+                        <option value="alert"
+                                @if(old('app_log_level') == 'alert' || $envConfig->get('LOG_LEVEL') == 'alert') selected @endif>
+                          {{ trans('installer_messages.environment.wizard.form.app_log_level_label_alert') }}
+                        </option>
+
+                        <option value="emergency"
+                                @if(old('app_log_level') == 'emergency' || $envConfig->get('LOG_LEVEL') == 'emergency') selected @endif>
+                          {{ trans('installer_messages.environment.wizard.form.app_log_level_label_emergency') }}
+                        </option>
                     </select>
                     @if ($errors->has('app_log_level'))
                         <span class="error-block">
@@ -117,7 +152,10 @@
                     <label for="app_url">
                         {{ trans('installer_messages.environment.wizard.form.app_url_label') }}
                     </label>
-                    <input type="url" name="app_url" id="app_url" value="{{ old('app_url') ?? "http://localhost"}}" placeholder="{{ trans('installer_messages.environment.wizard.form.app_url_placeholder') }}" />
+                    <input type="url" name="app_url" id="app_url"
+                           value="{{ old('app_url') ?? $appUrl}}"
+                           placeholder="{{ trans('installer_messages.environment.wizard.form.app_url_placeholder') }}"
+                    />
                     @if ($errors->has('app_url'))
                         <span class="error-block">
                             <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -139,7 +177,10 @@
                     <label for="database_hostname">
                         {{ trans('installer_messages.environment.wizard.form.db_host_label') }}
                     </label>
-                    <input type="text" name="database_hostname" id="database_hostname" value="{{ old('database_hostname') ?? "127.0.0.1"}}" placeholder="{{ trans('installer_messages.environment.wizard.form.db_host_placeholder') }}" />
+                    <input type="text" name="database_hostname" id="database_hostname"
+                           value="{{ old('database_hostname') ?? $envConfig->get('DB_HOST') }}"
+                           placeholder="{{ trans('installer_messages.environment.wizard.form.db_host_placeholder') }}"
+                    />
                     @if ($errors->has('database_hostname'))
                         <span class="error-block">
                             <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -152,7 +193,10 @@
                     <label for="database_port">
                         {{ trans('installer_messages.environment.wizard.form.db_port_label') }}
                     </label>
-                    <input type="number" name="database_port" id="database_port" value="{{ old('database_port') ?? "3306"}}" placeholder="{{ trans('installer_messages.environment.wizard.form.db_port_placeholder') }}" />
+                    <input type="number" name="database_port" id="database_port"
+                           value="{{ old('database_port') ?? $envConfig->get('DB_PORT') }}"
+                           placeholder="{{ trans('installer_messages.environment.wizard.form.db_port_placeholder') }}"
+                    />
                     @if ($errors->has('database_port'))
                         <span class="error-block">
                             <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -165,7 +209,10 @@
                     <label for="database_name">
                         {{ trans('installer_messages.environment.wizard.form.db_name_label') }}
                     </label>
-                    <input type="text" name="database_name" id="database_name" value="{{ old('database_name') }}" placeholder="{{ trans('installer_messages.environment.wizard.form.db_name_placeholder') }}" />
+                    <input type="text" name="database_name" id="database_name"
+                           value="{{ old('database_name') ?? $envConfig->get('DB_DATABASE') }}"
+                           placeholder="{{ trans('installer_messages.environment.wizard.form.db_name_placeholder') }}"
+                    />
                     @if ($errors->has('database_name'))
                         <span class="error-block">
                             <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -178,7 +225,9 @@
                     <label for="database_username">
                         {{ trans('installer_messages.environment.wizard.form.db_username_label') }}
                     </label>
-                    <input type="text" name="database_username" id="database_username" value="{{ old('database_username') }}" placeholder="{{ trans('installer_messages.environment.wizard.form.db_username_placeholder') }}" />
+                    <input type="text" name="database_username" id="database_username"
+                           value="{{ old('database_username') ?? $envConfig->get('DB_USERNAME')}}"
+                           placeholder="{{ trans('installer_messages.environment.wizard.form.db_username_placeholder') }}" />
                     @if ($errors->has('database_username'))
                         <span class="error-block">
                             <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
@@ -201,152 +250,10 @@
                 </div>
 
                 <div class="buttons">
-                    <button class="button" onclick="showApplicationSettings();return false">
-                        {{ trans('installer_messages.environment.wizard.form.buttons.setup_application') }}
-                        <i class="fa fa-angle-right fa-fw" aria-hidden="true"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="tab" id="tab3content">
-                <div class="block">
-                    <input type="radio" name="appSettingsTabs" id="appSettingsTab1" value="null" checked />
-                    <label for="appSettingsTab1">
-                        <span>
-                            {{ trans('installer_messages.environment.wizard.form.app_tabs.broadcasting_title') }}
-                        </span>
-                    </label>
-
-
-                    <div class="info">
-                        <div class="form-group {{ $errors->has('broadcast_driver') ? ' has-error ' : '' }}">
-                            <label for="broadcast_driver">{{ trans('installer_messages.environment.wizard.form.app_tabs.broadcasting_label') }}
-                                <sup>
-                                    <a href="https://laravel.com/docs/5.4/broadcasting" target="_blank" title="{{ trans('installer_messages.environment.wizard.form.app_tabs.more_info') }}">
-                                        <i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>
-                                        <span class="sr-only">{{ trans('installer_messages.environment.wizard.form.app_tabs.more_info') }}</span>
-                                    </a>
-                                </sup>
-                            </label>
-                            <input type="text" name="broadcast_driver" id="broadcast_driver" value="{{ old('broadcast_driver') ?? "log" }}" placeholder="{{ trans('installer_messages.environment.wizard.form.app_tabs.broadcasting_placeholder') }}" />
-                            @if ($errors->has('broadcast_driver'))
-                                <span class="error-block">
-                                    <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
-                                    {{ $errors->first('broadcast_driver') }}
-                                </span>
-                            @endif
-                        </div>
-
-                        <div class="form-group {{ $errors->has('cache_driver') ? ' has-error ' : '' }}">
-                            <label for="cache_driver">{{ trans('installer_messages.environment.wizard.form.app_tabs.cache_label') }}
-                                <sup>
-                                    <a href="https://laravel.com/docs/5.4/cache" target="_blank" title="{{ trans('installer_messages.environment.wizard.form.app_tabs.more_info') }}">
-                                        <i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>
-                                        <span class="sr-only">{{ trans('installer_messages.environment.wizard.form.app_tabs.more_info') }}</span>
-                                    </a>
-                                </sup>
-                            </label>
-                            <input type="text" name="cache_driver" id="cache_driver" value="{{ old('cache_driver') ?? "file" }}" placeholder="{{ trans('installer_messages.environment.wizard.form.app_tabs.cache_placeholder') }}" />
-                            @if ($errors->has('cache_driver'))
-                                <span class="error-block">
-                                    <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
-                                    {{ $errors->first('cache_driver') }}
-                                </span>
-                            @endif
-                        </div>
-
-                        <div class="form-group {{ $errors->has('session_driver') ? ' has-error ' : '' }}">
-                            <label for="session_driver">{{ trans('installer_messages.environment.wizard.form.app_tabs.session_label') }}
-                                <sup>
-                                    <a href="https://laravel.com/docs/5.4/session" target="_blank" title="{{ trans('installer_messages.environment.wizard.form.app_tabs.more_info') }}">
-                                        <i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>
-                                        <span class="sr-only">{{ trans('installer_messages.environment.wizard.form.app_tabs.more_info') }}</span>
-                                    </a>
-                                </sup>
-                            </label>
-                            <input type="text" name="session_driver" id="session_driver" value="{{ old('session_driver') ?? "file" }}" placeholder="{{ trans('installer_messages.environment.wizard.form.app_tabs.session_placeholder') }}" />
-                            @if ($errors->has('session_driver'))
-                                <span class="error-block">
-                                    <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
-                                    {{ $errors->first('session_driver') }}
-                                </span>
-                            @endif
-                        </div>
-
-                        <div class="form-group {{ $errors->has('queue_driver') ? ' has-error ' : '' }}">
-                            <label for="queue_driver">{{ trans('installer_messages.environment.wizard.form.app_tabs.queue_label') }}
-                                <sup>
-                                    <a href="https://laravel.com/docs/5.4/queues" target="_blank" title="{{ trans('installer_messages.environment.wizard.form.app_tabs.more_info') }}">
-                                        <i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>
-                                        <span class="sr-only">{{ trans('installer_messages.environment.wizard.form.app_tabs.more_info') }}</span>
-                                    </a>
-                                </sup>
-                            </label>
-                            <input type="text" name="queue_driver" id="queue_driver" value="{{ old('queue_driver') ?? "database" }}" placeholder="{{ trans('installer_messages.environment.wizard.form.app_tabs.queue_placeholder') }}" />
-                            @if ($errors->has('queue_driver'))
-                                <span class="error-block">
-                                    <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
-                                    {{ $errors->first('queue_driver') }}
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-                <div class="block">
-                    <input type="radio" name="appSettingsTabs" id="appSettingsTab2" value="null"/>
-                    <label for="appSettingsTab2">
-                        <span>
-                            {{ trans('installer_messages.environment.wizard.form.app_tabs.redis_label') }}
-                        </span>
-                    </label>
-                    <div class="info">
-                        <div class="form-group {{ $errors->has('redis_hostname') ? ' has-error ' : '' }}">
-                            <label for="redis_hostname">
-                                {{ trans('installer_messages.environment.wizard.form.app_tabs.redis_host') }}
-                                <sup>
-                                    <a href="https://laravel.com/docs/5.4/redis" target="_blank" title="{{ trans('installer_messages.environment.wizard.form.app_tabs.more_info') }}">
-                                        <i class="fa fa-info-circle fa-fw" aria-hidden="true"></i>
-                                        <span class="sr-only">{{ trans('installer_messages.environment.wizard.form.app_tabs.more_info') }}</span>
-                                    </a>
-                                </sup>
-                            </label>
-                            <input type="text" name="redis_hostname" id="redis_hostname" value="{{ old('redis_hostname') ?? "127.0.0.1" }}" placeholder="{{ trans('installer_messages.environment.wizard.form.app_tabs.redis_host') }}" />
-                            @if ($errors->has('redis_hostname'))
-                                <span class="error-block">
-                                    <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
-                                    {{ $errors->first('redis_hostname') }}
-                                </span>
-                            @endif
-                        </div>
-
-                        <div class="form-group {{ $errors->has('redis_password') ? ' has-error ' : '' }}">
-                            <label for="redis_password">{{ trans('installer_messages.environment.wizard.form.app_tabs.redis_password') }}</label>
-                            <input type="password" name="redis_password" id="redis_password" value="" placeholder="{{ trans('installer_messages.environment.wizard.form.app_tabs.redis_password') }}" />
-                            @if ($errors->has('redis_password'))
-                                <span class="error-block">
-                                    <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
-                                    {{ $errors->first('redis_password') }}
-                                </span>
-                            @endif
-                        </div>
-
-                        <div class="form-group {{ $errors->has('redis_port') ? ' has-error ' : '' }}">
-                            <label for="redis_port">{{ trans('installer_messages.environment.wizard.form.app_tabs.redis_port') }}</label>
-                            <input type="number" name="redis_port" id="redis_port" value="{{ old('redis_port') ?? "6379"}}" placeholder="{{ trans('installer_messages.environment.wizard.form.app_tabs.redis_port') }}" />
-                            @if ($errors->has('redis_port'))
-                                <span class="error-block">
-                                    <i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i>
-                                    {{ $errors->first('redis_port') }}
-                                </span>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-
-                <div class="buttons">
-                    <button class="button" type="submit">
-                        {{ trans('installer_messages.environment.wizard.next') }}
-                        <i class="fa fa-angle-right fa-fw" aria-hidden="true"></i>
-                    </button>
+                  <button class="button" type="submit">
+                    {{ trans('installer_messages.environment.wizard.next') }}
+                    <i class="fa fa-angle-right fa-fw" aria-hidden="true"></i>
+                  </button>
                 </div>
             </div>
         </form>
@@ -356,19 +263,8 @@
 
 @section('scripts')
     <script type="text/javascript">
-        function checkEnvironment(val) {
-            var element=document.getElementById('environment_text_input');
-            if(val=='other') {
-                element.style.display='block';
-            } else {
-                element.style.display='none';
-            }
-        }
         function showDatabaseSettings() {
             document.getElementById('tab2').checked = true;
-        }
-        function showApplicationSettings() {
-            document.getElementById('tab3').checked = true;
         }
     </script>
 @endsection
