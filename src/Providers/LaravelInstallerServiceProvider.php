@@ -38,6 +38,9 @@ class LaravelInstallerServiceProvider extends ServiceProvider
         $router->middlewareGroup('install', [CanInstall::class]);
         $router->middlewareGroup('update', [CanUpdate::class]);
         $router->middlewareGroup('installed', [Installed::class]);
+
+        // set 'installed' middleware highest order
+        array_unshift($router->middlewarePriority, Installed::class);
     }
 
     /**
