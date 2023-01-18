@@ -35,7 +35,7 @@ class EnvironmentController extends Controller {
     public function environmentMenu() {
       $appUrl = Arr::get($_SERVER, 'REQUEST_SCHEME', 'http') . '://' . Arr::get($_SERVER, 'HTTP_HOST', 'localhost');
       $env = collect($this->EnvironmentManager->getEnvContent());
-      return view('vendor.installer.environment-wizard', ['envConfig' => $env, 'appUrl' => $appUrl]);
+      return view('installer::environment-wizard', ['envConfig' => $env, 'appUrl' => $appUrl]);
     }
 
     /**

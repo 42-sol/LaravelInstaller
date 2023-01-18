@@ -21,6 +21,6 @@ class FinalController extends Controller {
 
     event(new LaravelInstallerFinished);
 
-    return view('vendor.installer.finished', compact('finalMessages', 'finalStatusMessage'));
+    return view('installer::finished', compact('finalMessages', 'finalStatusMessage'));
   }
 }

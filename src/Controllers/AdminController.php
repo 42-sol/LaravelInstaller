@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Artisan;
 
 class AdminController extends Controller {
   public function index() {
-    return view('vendor.installer.create_admin');
+    return view('installer::create_admin');
   }
 
   /**
@@ -24,7 +24,7 @@ class AdminController extends Controller {
     try {
       Artisan::call('admin:create', $request->except('_token'));
     } catch (Error|Exception $e) {
-      return response()->view('vendor.installer.create_admin', [ 'status' => false, 'error' => $e->getMessage()]);
+      return response()->view('installer::create_admin', [ 'status' => false, 'error' => $e->getMessage()]);
     }
     return redirect()->route('LaravelInstaller::final');
   }

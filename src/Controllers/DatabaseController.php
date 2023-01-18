@@ -21,7 +21,7 @@ class DatabaseController extends Controller
     }
 
     public function index() {
-      return view('vendor.installer.database');
+      return view('installer::database');
     }
 
   /**
@@ -34,7 +34,7 @@ class DatabaseController extends Controller
     public function migrate(Request $request): \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response {
       $response = $this->databaseManager->migrateAndSeed($request);
       if ($response['status'] == false) {
-        return response()->view('vendor.installer.database', $response);
+        return response()->view('installer::database', $response);
       }
       return redirect()->route('LaravelInstaller::admin');
     }
