@@ -29,5 +29,13 @@
     "config": {
         "sort-packages": true
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "require-dev": {
+        "scssphp/scssphp": "^1.11"
+    },
+    "scripts": {
+        "styles": "composer run build-style && composer run build-min-style",
+        "build-style": "pscss --sourcemap src/Resources/styles/scss/style.scss assets/css/style.css",
+        "build-min-style": "pscss --sourcemap -s compressed src/Resources/styles/scss/style.scss assets/css/style.min.css"
+    }
 }

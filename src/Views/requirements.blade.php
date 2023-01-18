@@ -16,7 +16,7 @@
             <li class="list__item list__title {{ $phpSupportInfo['supported'] ? 'success' : 'error' }}">
                 <strong>{{ ucfirst($type) }}</strong>
                 @if($type == 'php')
-                    <strong>
+                    <strong class="req_strong">
                         <small>
                             (version {{ $phpSupportInfo['minimum'] }} required)
                         </small>

@@ -22,9 +22,11 @@
         @endif
       @endif
 
-      <div>
-        <label for='useSeeders'>{{ trans('installer_messages.database.label') }}</label>
-        <input type='checkbox' id='useSeders' name='useSeeders'>
+      <div class="block_check_label">
+        <label for='useSeeders' class="label_check">
+          {{ trans('installer_messages.database.label') }}
+        </label>
+        <input type='checkbox' class="checkbox_data" id='useSeders' name='useSeeders'>
       </div>
 
       <div class="buttons">

@@ -817,6 +817,7 @@ input[type=text] {
 .step__icon {
 	background-color: $color_11;
 	font-style: normal;
+	font-size: 16px;
 	width: 40px;
 	height: 40px;
 	display: -webkit-flex;
@@ -872,8 +873,9 @@ input[type=text] {
 	display: inline-block;
 	background-color: $color_12;
 	//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
-	border-radius: 2px;
-	padding: 7px 20px;
+	border-radius: 8px;
+	padding: 10px 15px 10px 15px;
+	font-size: 17px;
 	color: $color_10;
 	//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
 	box-shadow: 0 1px 1.5px $color_14, 0 1px 1px $color_15;
@@ -1055,6 +1057,14 @@ input[type='password'] {
 	padding: 10px 12px;
 	width: calc(100% - 24px);
 	margin: 0 auto 1em;
+}
+input[type='email'] {
+    outline: none;
+    border: 1px solid $color_27;
+    border-radius: 3px;
+    padding: 10px 12px;
+    width: calc(100% - 24px);
+    margin: 0 auto 1em;
 }
 input[type='url'] {
 	outline: none;
@@ -1345,4 +1355,64 @@ svg:not(:root) {
 		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
 		border-radius: 0 0 3px 3px;
 	}
+}
+.collapse_block {
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.2s ease-out;
+}
+.collapsible {
+	text-align: left;
+	padding: 6px 10px;
+	width: 100%;
+	font-size: 13px;
+	background-color: #d0d0d0;
+	border: 1px solid #bfbebe;
+	-webkit-transition: background-color .2s ease;
+	transition: background-color .2s ease;
+	&:hover {
+		background-color: #c4c4c4;
+	}
+	&:after {
+		content: '\002B';
+		color: white;
+		font-weight: bold;
+		float: right;
+		margin-left: 5px;
+	}
+	&.active:after {
+		content: "\2212";
+	}
+}
+.block_check_label {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex;
+	justify-content: space-between;
+}
+.checkbox_data {
+	width: 30px;
+}
+.label_check {
+	margin-right: 30px;
+	font-size: 14px;
+}
+.final_log {
+	border: 1px solid #00000024;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+.p_log {
+	font-size: 15px;
+	font-weight: bold;
+}
+.code_log {
+	font-size: 13px;
+}
+.welcome_text {
+	font-size: 18px;
+	margin: 5px 0 25px;
+	font-weight: 700;
 }
