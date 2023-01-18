@@ -26,6 +26,7 @@ class LaravelInstallerServiceProvider extends ServiceProvider
     {
         $this->publishFiles();
         $this->loadRoutesFrom(__DIR__.'/../Routes/web.php');
+        $this->loadViewsFrom(__DIR__.'/../Views', 'installer');
     }
 
     /**
