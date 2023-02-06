@@ -13,24 +13,28 @@
     <form method="post" action="{{ route('LaravelInstaller::databaseMigrate') }}">
       @csrf
 
-      @if(isset($status))
-        @if($status==false)
-          <div>
-            {{ trans('installer_messages.database.statusError') }}<br>
-            {{ $error }}
-          </div>
-        @endif
+      @if(isset($inProgress) && $inProgress)
+          <p>{{ trans('installer_messages.database.inProgress') }}</p>
       @endif
 
-      <div class="block_check_label">
-        <label for='useSeeders' class="label_check">
-          {{ trans('installer_messages.database.label') }}
-        </label>
-        <input type='checkbox' class="checkbox_data" id='useSeders' name='useSeeders'>
-      </div>
+      @if(!$inProgress)
+          <div class="block_check_label">
+              <label for='useSeeders' class="label_check">
+                  {{ trans('installer_messages.database.label') }}
+              </label>
+              <input type='checkbox' class="checkbox_data" id='useSeders' name='useSeeders'>
+          </div>
+      @endif
 
       <div class="buttons">
         <button type='submit' class="button button-wizard">{{ trans('installer_messages.database.migrate') }}</button>
       </div>
     </form>
+
+    <script type="text/javascript">
+        window.flag = {{ $inProgress }};
+        if(window.flag) {
+          setTimeout(function () { window.location.reload() }, 1000 * 5)
+        }
+    </script>
 @endsection
