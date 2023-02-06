@@ -139,9 +139,8 @@ return [
     'label' => 'Use seeders (fill database with test data)',
     'migrate' => 'Run migrations',
     'inProgress' => 'Migration in progress. After process completion you will be redirected to the next page',
-
     'statusOK' => 'Success',
-    'statusError' => 'Error occurred during migration:',
+    'statusError' => 'Error occurred during migration',
     'next' => 'Create user'
   ],
 

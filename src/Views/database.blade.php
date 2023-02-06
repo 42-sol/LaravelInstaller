@@ -14,16 +14,20 @@
       @csrf
 
       @if(isset($inProgress) && $inProgress)
-          <p>{{ trans('installer_messages.database.inProgress') }}</p>
+        <p>{{ trans('installer_messages.database.inProgress') }}</p>
+      @endif
+
+      @if(isset($error))
+        <p>{{ trans('installer_messages.database.statusError') }}</p>
       @endif
 
       @if(!$inProgress)
-          <div class="block_check_label">
-              <label for='useSeeders' class="label_check">
-                  {{ trans('installer_messages.database.label') }}
-              </label>
-              <input type='checkbox' class="checkbox_data" id='useSeders' name='useSeeders'>
-          </div>
+        <div class="block_check_label">
+          <label for='useSeeders' class="label_check">
+            {{ trans('installer_messages.database.label') }}
+          </label>
+          <input type='checkbox' class="checkbox_data" id='useSeders' name='useSeeders'>
+        </div>
       @endif
 
       <div class="buttons">
@@ -32,9 +36,9 @@
     </form>
 
     <script type="text/javascript">
-        window.flag = {{ $inProgress }};
-        if(window.flag) {
-          setTimeout(function () { window.location.reload() }, 1000 * 5)
-        }
+      window.flag = {{ $inProgress }};
+      if(window.flag) {
+        setTimeout(function () { window.location.reload() }, 1000 * 5)
+      }
     </script>
 @endsection

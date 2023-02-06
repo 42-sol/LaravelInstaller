@@ -19,6 +19,12 @@ class DatabaseController extends Controller
             return view('installer::database')->with(['inProgress' => 0]);
         } else {
           $request->session()->remove('migrationPid');
+
+          $content = file_get_contents(base_path('migrate.log'));
+          if (str_contains($content, 'FAIL')) {
+              return view('installer::database')->with(['error' => true, 'inProgress' => false]);
+          }
+
           return redirect()->route('LaravelInstaller::admin');
         }
       }
