@@ -4,24 +4,30 @@ namespace RachidLaasri\LaravelInstaller\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use RachidLaasri\LaravelInstaller\Helpers\DatabaseManager;
 
 class DatabaseController extends Controller
 {
-    /**
-     * @var DatabaseManager
-     */
-    private DatabaseManager $databaseManager;
+    public function index(Request $request) {
+      $migrationPid = $request->session()->get('migrationPid');
 
-    /**
-     * @param DatabaseManager $databaseManager
-     */
-    public function __construct(DatabaseManager $databaseManager) {
-      $this->databaseManager = $databaseManager;
-    }
+      if ($migrationPid && posix_getpgid($migrationPid)) {
+        $content = file_get_contents(base_path('migrate.log'));
 
-    public function index() {
-      return view('installer::database');
+        return view('installer::database')->with(['inProgress' => 1, 'log' => $content]);
+      } else {
+        if (!isset($migrationPid)) {
+            return view('installer::database')->with(['inProgress' => 0]);
+        } else {
+          $request->session()->remove('migrationPid');
+
+          $content = file_get_contents(base_path('migrate.log'));
+          if (str_contains($content, 'FAIL')) {
+              return view('installer::database')->with(['error' => true, 'inProgress' => false]);
+          }
+
+          return redirect()->route('LaravelInstaller::admin');
+        }
+      }
     }
 
   /**
@@ -32,10 +38,32 @@ class DatabaseController extends Controller
    * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
    */
     public function migrate(Request $request): \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response {
-      $response = $this->databaseManager->migrateAndSeed($request);
-      if ($response['status'] == false) {
-        return response()->view('installer::database', $response);
+      if ($request->input('useSeeders')) {
+        $temp = $this->run("php artisan migrate --force --seed", base_path('migrate.log'));
+      } else {
+        $temp = $this->run("php artisan migrate --force", base_path('migrate.log'));
       }
-      return redirect()->route('LaravelInstaller::admin');
+
+      $pid = intval($temp);
+      $request->session()->put('migrationPid', $pid);
+      return redirect('/install/database');
+    }
+
+    /**
+     * Run process in background
+     *
+     * @param $command
+     * @param $outputFile
+     *
+     * @return false|string|null
+     */
+    function run($command, $outputFile = '/dev/null') {
+      $pwd = base_path();
+      return shell_exec(sprintf(
+        'cd %s && %s > %s 2>&1 & echo $!',
+        $pwd,
+        $command,
+        $outputFile
+      ));
     }
 }

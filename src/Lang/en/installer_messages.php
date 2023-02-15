@@ -136,10 +136,11 @@ return [
   'database' => [
     'templateTitle' => 'Step 4 | Database',
     'title' => 'Run migrations and seeders',
-    'label' => 'Use seeders (fill database with test data)',
+    'label' => 'Fill database with common data (document types, asset types, etc.)',
     'migrate' => 'Run migrations',
+    'inProgress' => 'Migration in progress. After process completion you will be redirected to the next page',
     'statusOK' => 'Success',
-    'statusError' => 'Error occurred during migration:',
+    'statusError' => 'Error occurred during migration',
     'next' => 'Create user'
   ],
 
