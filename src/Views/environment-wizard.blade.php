@@ -69,7 +69,7 @@
                             <label for="environment">
                                 {{ trans('installer_messages.environment.wizard.form.app_environment_label') }}
                             </label>
-                            <select name="environment" id="environment" onchange='checkEnvironment(this.value);'>
+                            <select name="environment" id="environment">
                                 <option value="local"
                                         @if(old('environment') == 'local' || $envConfig->get('APP_ENV') == 'local') selected @endif>
                                 {{ trans('installer_messages.environment.wizard.form.app_environment_label_local') }}
